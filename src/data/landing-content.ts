@@ -4,6 +4,7 @@
  */
 
 export const AFFILIATE_LINK = "https://be.elementor.com/visit/?bta=204253&brand=elementor";
+export const SITE_URL = "https://elementorpro.vercel.app";
 
 // Icon key mapping
 export type FeatureIcon = "Layout" | "Zap" | "Users" | "Code" | "Globe" | "Shield";
@@ -14,6 +15,7 @@ export const landingData = {
     proSuffix: "Pro",
     fullName: "Elementor Pro",
     footerLabel: "Elementor Affiliate",
+    url: SITE_URL,
   },
 
   nav: {
@@ -141,7 +143,7 @@ export const landingData = {
   affiliateDisclaimer: {
     title: "Affiliate Disclaimer",
     linkPhrase: "Elementor Pro signup",
-    text: "This is an independent review and referral site. Some links on this page, including the Elementor Pro signup buttons, are affiliate links. If you click and make a purchase, we may receive a small commission at no extra cost to you. This helps us keep the site running and deliver quality content. Thank you for your support!",
+    text: "This is an independent review and referral site (https://elementorpro.vercel.app). Some links on this page, including the Elementor Pro signup buttons, are affiliate links. If you click and make a purchase, we may receive a small commission at no extra cost to you. This helps us keep the site running and deliver quality content. Thank you for your support!",
   },
 
   footer: {
@@ -152,7 +154,7 @@ export const landingData = {
       { key: "privacy", label: "Privacy Policy" },
       { key: "contact", label: "Contact" },
     ],
-    disclaimer: "This site is operated by an independent affiliate partner and is NOT the official Elementor Ltd. website. Elementor name, logo and trademarks are property of Elementor Ltd. We may receive a commission when you click links on this site and make a purchase (at no extra cost to you).",
+    disclaimer: "This site (https://elementorpro.vercel.app) is operated by an independent affiliate partner and is NOT the official Elementor Ltd. website. Elementor name, logo and trademarks are property of Elementor Ltd. We may receive a commission when you click links on this site and make a purchase (at no extra cost to you).",
     copyright: "Copyright belongs to the independent affiliate partner. All rights reserved.",
   },
 
@@ -160,8 +162,8 @@ export const landingData = {
     terms: {
       title: "Terms of Service",
       content: [
-        { heading: "1. Acceptance of Terms:", text: "By accessing and using this website, you agree to comply with the terms and conditions below." },
-        { heading: "2. Nature of Service:", text: "This website provides information, reviews and referrals for Elementor software. We do not directly sell, provide technical support, or process payments for this product." },
+        { heading: "1. Acceptance of Terms:", text: "By accessing and using https://elementorpro.vercel.app, you agree to comply with the terms and conditions below." },
+        { heading: "2. Nature of Service:", text: "This website (https://elementorpro.vercel.app) provides information, reviews and referrals for Elementor software. We do not directly sell, provide technical support, or process payments for this product." },
         { heading: "3. Disclaimer:", text: "All information on this website is provided \"as is\". We do not guarantee absolute accuracy and are not liable for any damages arising from use of this information. Please verify details on the official Elementor website before purchasing." },
         { heading: "4. Intellectual Property:", text: "Elementor trademarks and logos are the property of Elementor Ltd. Review content is our copyright." },
       ],
@@ -169,17 +171,17 @@ export const landingData = {
     privacy: {
       title: "Privacy Policy",
       content: [
-        { heading: "1. Information Collection:", text: "We do not directly collect personal information (name, email, phone) unless you voluntarily submit it via a contact form." },
+        { heading: "1. Information Collection:", text: "https://elementorpro.vercel.app does not directly collect personal information (name, email, phone) unless you voluntarily submit it via a contact form." },
         { heading: "2. Cookie Usage:", text: "This site uses cookies for affiliate link tracking. When you click an Elementor link, a cookie is stored in your browser to record the referral source." },
-        { heading: "3. Third-Party Data:", text: "We may use analytics tools (e.g. Google Analytics) to collect anonymous traffic data to improve user experience." },
+        { heading: "3. Third-Party Data:", text: "We may use analytics tools (e.g. Google Analytics) to collect anonymous traffic data to improve user experience on https://elementorpro.vercel.app." },
         { heading: "4. Data Protection:", text: "We do not sell, trade, or share user information with third parties for commercial purposes." },
       ],
     },
     contact: {
       title: "Contact Information",
-      intro: "If you have questions about the content, privacy policy, or terms of use, please contact us at:",
+      intro: "If you have questions about the content, privacy policy, or terms of use at https://elementorpro.vercel.app, please contact us at:",
       items: [
-        { label: "Email", value: "contact@yourdomain.com" },
+        { label: "Website", value: "https://elementorpro.vercel.app" },
         { label: "Note", value: "For Elementor technical support, please contact Elementor Ltd. support directly." },
       ],
     },

@@ -78,7 +78,7 @@ export default function Register() {
       <footer className="border-t border-slate-100 py-6 mt-auto">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <p className="text-xs text-slate-500">
-            © {new Date().getFullYear()} {landingData.site.name} Affiliate. All rights reserved.
+            © {new Date().getFullYear()} <a href="https://elementorpro.vercel.app" className="text-elementor hover:underline">elementorpro.vercel.app</a> - {landingData.site.name} Affiliate. All rights reserved.
           </p>
         </div>
       </footer>
