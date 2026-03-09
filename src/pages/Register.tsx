@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Layout, ExternalLink, ArrowLeft } from 'lucide-react';
+import { ExternalLink, ArrowLeft } from 'lucide-react';
 import { landingData, AFFILIATE_LINK } from '../data/landing-content';
 
 export default function Register() {
@@ -20,9 +20,7 @@ export default function Register() {
               <span className="text-sm font-medium">Back to Home</span>
             </Link>
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-elementor rounded-full flex items-center justify-center">
-                <Layout className="w-4 h-4 text-white" />
-              </div>
+              <img src="/logo.png" alt="Elementor Pro" className="h-8" />
               <span className="font-bold text-lg tracking-tight">
                 {landingData.site.name}
                 <span className="text-elementor">{landingData.site.proSuffix}</span>
@@ -46,6 +44,7 @@ export default function Register() {
             href={AFFILIATE_LINK}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => (window as Window & { gtag_report_conversion_track?: () => void }).gtag_report_conversion_track?.()}
             className="inline-flex items-center justify-center gap-2 bg-elementor hover:bg-elementor-hover text-white px-8 py-4 rounded-full text-base font-semibold transition-all shadow-lg shadow-rose-500/25 hover:-translate-y-0.5"
           >
             Get Elementor Pro

@@ -15,12 +15,10 @@ export default function Home() {
       <nav className="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-lg z-50 border-b border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-elementor rounded-full flex items-center justify-center">
-                {React.createElement(iconMap.Layout, { className: "w-4 h-4 text-white" })}
-              </div>
+            <Link to="/" className="flex items-center gap-2">
+              <img src="/logo.png" alt="Elementor Pro" className="h-8" />
               <span className="font-bold text-xl tracking-tight">{landingData.site.name}<span className="text-elementor">{landingData.site.proSuffix}</span></span>
-            </div>
+            </Link>
             
             <div className="hidden md:flex items-center gap-8">
               {landingData.nav.links.map((link) => (
@@ -31,6 +29,7 @@ export default function Home() {
                 href={AFFILIATE_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => (window as Window & { gtag_report_conversion_track?: () => void }).gtag_report_conversion_track?.()}
                 className="bg-elementor hover:bg-elementor-hover text-white px-6 py-2.5 rounded-full text-sm font-medium transition-all shadow-sm hover:shadow-md flex items-center gap-2"
               >
                 {landingData.nav.ctaText} {React.createElement(iconMap.ExternalLink, { className: "w-4 h-4" })}
@@ -57,6 +56,7 @@ export default function Home() {
                 href={AFFILIATE_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => (window as Window & { gtag_report_conversion_track?: () => void }).gtag_report_conversion_track?.()}
                 className="bg-elementor text-white px-6 py-3 rounded-lg text-sm font-medium text-center flex items-center justify-center gap-2"
               >
                 {landingData.nav.ctaText} {React.createElement(iconMap.ExternalLink, { className: "w-4 h-4" })}
@@ -87,6 +87,7 @@ export default function Home() {
                     const IconC = iconMap[cta.icon as keyof typeof iconMap];
                     return (
                       <a key={idx} href={cta.href} target={cta.href.startsWith('http') ? "_blank" : undefined} rel={cta.href.startsWith('http') ? "noopener noreferrer" : undefined}
+                        onClick={cta.href.startsWith('http') ? () => (window as Window & { gtag_report_conversion_track?: () => void }).gtag_report_conversion_track?.() : undefined}
                         className={cta.primary ? "w-full sm:w-auto bg-elementor hover:bg-elementor-hover text-white px-8 py-4 rounded-full text-base font-semibold transition-all shadow-lg shadow-rose-500/25 flex items-center justify-center gap-2 hover:-translate-y-0.5" : "w-full sm:w-auto bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 px-8 py-4 rounded-full text-base font-semibold transition-all flex items-center justify-center gap-2"}>
                         {cta.icon === 'PlayCircle' && IconC ? React.createElement(IconC, { className: "w-5 h-5" }) : null} {cta.text} {cta.icon === 'ExternalLink' && IconC ? React.createElement(IconC, { className: "w-5 h-5" }) : null}
                       </a>
@@ -155,7 +156,7 @@ export default function Home() {
                   ))}
                 </div>
                 <div className="mt-10">
-                  <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-elementor font-semibold hover:text-rose-400 transition-colors">
+                  <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer" onClick={() => (window as Window & { gtag_report_conversion_track?: () => void }).gtag_report_conversion_track?.()} className="inline-flex items-center gap-2 text-elementor font-semibold hover:text-rose-400 transition-colors">
                     {landingData.workflow.ctaText} <ChevronRight className="w-5 h-5" />
                   </a>
                 </div>
@@ -200,7 +201,7 @@ export default function Home() {
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">{landingData.cta.title}</h2>
             <p className="text-xl text-rose-100 mb-10 max-w-2xl mx-auto">{landingData.cta.description}</p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto bg-white text-elementor px-8 py-4 rounded-full text-lg font-bold transition-all shadow-xl hover:scale-105 flex items-center justify-center gap-2">
+              <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer" onClick={() => (window as Window & { gtag_report_conversion_track?: () => void }).gtag_report_conversion_track?.()} className="w-full sm:w-auto bg-white text-elementor px-8 py-4 rounded-full text-lg font-bold transition-all shadow-xl hover:scale-105 flex items-center justify-center gap-2">
                 {landingData.cta.buttonText} {React.createElement(iconMap.ExternalLink, { className: "w-5 h-5" })}
               </a>
             </div>
@@ -218,7 +219,7 @@ export default function Home() {
                   {landingData.affiliateDisclaimer.text.split(landingData.affiliateDisclaimer.linkPhrase).map((part, i) => (
                     <span key={i}>
                       {i > 0 && (
-                        <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer" className="text-elementor hover:underline font-medium inline-flex items-center gap-1">
+                        <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer" onClick={() => (window as Window & { gtag_report_conversion_track?: () => void }).gtag_report_conversion_track?.()} className="text-elementor hover:underline font-medium inline-flex items-center gap-1">
                           {landingData.affiliateDisclaimer.linkPhrase} {React.createElement(iconMap.ExternalLink, { className: "w-3 h-3" })}
                         </a>
                       )}
