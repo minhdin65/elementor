@@ -35,19 +35,41 @@ export async function POST(request: Request) {
     gclid = formData.get('gclid') as string | null;
   }
 
-  // Chỉ redirect sang Elementor khi có gclid (Google Ads). Không gclid → về trang chủ.
+  // Chỉ redirect khi có gclid/gad (Google Ads). Không gclid → về trang chủ.
   if (!gclid) {
     return Response.redirect(HOMEPAGE, 302);
   }
-  const redirectUrl = url && isValidRedirectUrl(url) ? url : DEFAULT_REDIRECT;
-  return Response.redirect(redirectUrl, 302);
+  let redirectUrl = url && isValidRedirectUrl(url) ? url : DEFAULT_REDIRECT;
+  // Loại bỏ gclid khỏi URL đích → traffic hiển thị "không xác định"
+  try {
+    const u = new URL(redirectUrl);
+    u.searchParams.delete('gclid');
+    u.searchParams.delete('gad_source');
+    u.searchParams.delete('gd_source');
+    redirectUrl = u.toString();
+  } catch {}
+  // Dùng HTML với link rel=noreferrer để không gửi Referer (Origin)
+  return new Response(
+    `<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><a id="r" href="${redirectUrl.replace(/"/g, '&quot;')}" rel="noreferrer noopener"></a><script>document.getElementById("r").click();</script></body></html>`,
+    { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8' } }
+  );
 }
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
   const target = url.searchParams.get('url');
-  const gclid = url.searchParams.get('gclid');
+  const gclid = url.searchParams.get('gclid') || url.searchParams.get('gad_source') || url.searchParams.get('gd_source');
   if (!gclid) return Response.redirect(HOMEPAGE, 302);
-  const redirectUrl = target && isValidRedirectUrl(target) ? target : DEFAULT_REDIRECT;
-  return Response.redirect(redirectUrl, 302);
+  let redirectUrl = target && isValidRedirectUrl(target) ? target : DEFAULT_REDIRECT;
+  try {
+    const u = new URL(redirectUrl);
+    u.searchParams.delete('gclid');
+    u.searchParams.delete('gad_source');
+    u.searchParams.delete('gd_source');
+    redirectUrl = u.toString();
+  } catch {}
+  return new Response(
+    `<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><a id="r" href="${redirectUrl.replace(/"/g, '&quot;')}" rel="noreferrer noopener"></a><script>document.getElementById("r").click();</script></body></html>`,
+    { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8' } }
+  );
 }

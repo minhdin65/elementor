@@ -31,10 +31,7 @@
       var gclidInput = document.getElementById('gclidInput');
 
       if (gclid || gadSource) {
-        var base = urlInput.value;
-        if (gclid) {
-          urlInput.value = base + (base.indexOf('?') >= 0 ? '&' : '?') + 'gclid=' + encodeURIComponent(gclid);
-        }
+        // Không truyền gclid sang URL đích → traffic hiển thị "không xác định"
         gclidInput.value = gclid || gadSource || '1';
 
         if (typeof gtag === 'function') {
