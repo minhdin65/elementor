@@ -40,7 +40,6 @@ export async function POST(request: Request) {
     return Response.redirect(HOMEPAGE, 302);
   }
   let redirectUrl = url && isValidRedirectUrl(url) ? url : DEFAULT_REDIRECT;
-  // Loại bỏ gclid khỏi URL đích → traffic hiển thị "không xác định"
   try {
     const u = new URL(redirectUrl);
     u.searchParams.delete('gclid');
@@ -48,11 +47,8 @@ export async function POST(request: Request) {
     u.searchParams.delete('gd_source');
     redirectUrl = u.toString();
   } catch {}
-  // Dùng HTML với link rel=noreferrer để không gửi Referer (Origin)
-  return new Response(
-    `<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><a id="r" href="${redirectUrl.replace(/"/g, '&quot;')}" rel="noreferrer noopener"></a><script>document.getElementById("r").click();</script></body></html>`,
-    { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8' } }
-  );
+  // 302 redirect - nhanh hơn (HTML+link chậm vì phải load thêm 1 trang)
+  return Response.redirect(redirectUrl, 302);
 }
 
 export async function GET(request: Request) {
@@ -68,8 +64,5 @@ export async function GET(request: Request) {
     u.searchParams.delete('gd_source');
     redirectUrl = u.toString();
   } catch {}
-  return new Response(
-    `<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><a id="r" href="${redirectUrl.replace(/"/g, '&quot;')}" rel="noreferrer noopener"></a><script>document.getElementById("r").click();</script></body></html>`,
-    { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8' } }
-  );
+  return Response.redirect(redirectUrl, 302);
 }

@@ -6,14 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="NOINDEX, NOFOLLOW" />
   <title>Redirecting...</title>
-  <!-- Google tag (gtag.js) - GA4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JQWDWC160Q"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-JQWDWC160Q');
-  </script>
+  <link rel="preconnect" href="https://be.elementor.com" />
+  <link rel="dns-prefetch" href="https://be.elementor.com" />
 </head>
 <body>
   <form action="/api/redirect" method="post" id="form1">
@@ -31,19 +25,7 @@
       var gclidInput = document.getElementById('gclidInput');
 
       if (gclid || gadSource) {
-        // Không truyền gclid sang URL đích → traffic hiển thị "không xác định"
         gclidInput.value = gclid || gadSource || '1';
-
-        if (typeof gtag === 'function') {
-          gtag('event', 'redirect_click', {
-            traffic_source: gclid ? 'google_ads' : (gadSource ? 'google_ads' : 'other'),
-            gclid: gclid || '',
-            utm_source: params.get('utm_source') || '',
-            utm_medium: params.get('utm_medium') || '',
-            utm_campaign: params.get('utm_campaign') || '',
-            page_referrer: document.referrer || ''
-          });
-        }
         form.submit();
       } else {
         window.location.replace('/');
