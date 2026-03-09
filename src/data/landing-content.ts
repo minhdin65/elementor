@@ -3,7 +3,7 @@
  * Update content here instead of in components
  */
 
-export const AFFILIATE_LINK = "https://yithemes.com?refer_id=1170528&utm_source=unknown&utm_medium=unknown";
+export const AFFILIATE_LINK = "https://be.elementor.com/visit/?bta=204253&brand=elementor";
 export const SITE_URL = "https://elementorpro.vercel.app";
 
 // Icon key mapping

@@ -10,7 +10,7 @@ const ALLOWED_URLS = [
   'https://elementor.com/',
 ];
 
-const DEFAULT_REDIRECT = 'https://yithemes.com?refer_id=1170528';
+const DEFAULT_REDIRECT = 'https://be.elementor.com/visit/?bta=204253&brand=elementor';
 
 function isValidRedirectUrl(url: string): boolean {
   try {
