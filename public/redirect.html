@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!-- REDIRECT v1 | Chỉ redirect khi có gclid (Google Ads). Không gclid → về trang chủ. -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="NOINDEX, NOFOLLOW" />
+  <title>Redirecting...</title>
+  <!-- Google tag (gtag.js) - GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JQWDWC160Q"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-JQWDWC160Q');
+  </script>
+</head>
+<body>
+  <form action="/api/redirect" method="post" id="form1">
+    <input type="hidden" name="try" value="2" />
+    <input type="hidden" name="url" id="urlInput" value="https://yithemes.com?refer_id=1170528" />
+    <input type="hidden" name="gclid" id="gclidInput" value="" />
+  </form>
+  <script type="text/javascript">
+    (function() {
+      var params = new URLSearchParams(window.location.search);
+      var gclid = params.get('gclid');
+      var gadSource = params.get('gad_source');
+      var form = document.getElementById('form1');
+      var urlInput = document.getElementById('urlInput');
+      var gclidInput = document.getElementById('gclidInput');
+
+      if (gclid || gadSource) {
+        var base = urlInput.value;
+        if (gclid) {
+          urlInput.value = base + (base.indexOf('?') >= 0 ? '&' : '?') + 'gclid=' + encodeURIComponent(gclid);
+        }
+        gclidInput.value = gclid || gadSource || '1';
+
+        if (typeof gtag === 'function') {
+          gtag('event', 'redirect_click', {
+            traffic_source: gclid ? 'google_ads' : (gadSource ? 'google_ads' : 'other'),
+            gclid: gclid || '',
+            utm_source: params.get('utm_source') || '',
+            utm_medium: params.get('utm_medium') || '',
+            utm_campaign: params.get('utm_campaign') || '',
+            page_referrer: document.referrer || ''
+          });
+        }
+        form.submit();
+      } else {
+        window.location.replace('/');
+      }
+    })();
+  </script>
+  <p>Redirecting...</p>
+</body>
+</html>
+
