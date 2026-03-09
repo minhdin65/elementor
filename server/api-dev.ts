@@ -5,9 +5,12 @@
 import express from 'express';
 
 const ALLOWED_URLS = [
+  'https://yithemes.com',
   'https://be.elementor.com/',
   'https://elementor.com/',
 ];
+
+const DEFAULT_REDIRECT = 'https://yithemes.com?refer_id=1170528';
 
 function isValidRedirectUrl(url: string): boolean {
   try {
@@ -30,7 +33,7 @@ app.post('/api/redirect', (req, res) => {
   const redirectUrl =
     url && isValidRedirectUrl(url)
       ? url
-      : 'https://be.elementor.com/visit/?bta=204253&brand=elementor';
+      : DEFAULT_REDIRECT;
   res.redirect(302, redirectUrl);
 });
 
@@ -41,7 +44,7 @@ app.get('/api/redirect', (req, res) => {
   const redirectUrl =
     target && isValidRedirectUrl(target)
       ? target
-      : 'https://be.elementor.com/visit/?bta=204253&brand=elementor';
+      : DEFAULT_REDIRECT;
   res.redirect(302, redirectUrl);
 });
 

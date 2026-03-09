@@ -1,9 +1,12 @@
 // REDIRECT v1 | Revert to v0: see REDIRECT_VERSIONS.md
 // Allowed redirect destinations (whitelist for security)
 const ALLOWED_URLS = [
+  'https://yithemes.com',
   'https://be.elementor.com/',
   'https://elementor.com/',
 ];
+
+const DEFAULT_REDIRECT = 'https://yithemes.com?refer_id=1170528';
 
 function isValidRedirectUrl(url: string): boolean {
   try {
@@ -36,7 +39,7 @@ export async function POST(request: Request) {
   if (!gclid) {
     return Response.redirect(HOMEPAGE, 302);
   }
-  const redirectUrl = url && isValidRedirectUrl(url) ? url : 'https://be.elementor.com/visit/?bta=204253&brand=elementor';
+  const redirectUrl = url && isValidRedirectUrl(url) ? url : DEFAULT_REDIRECT;
   return Response.redirect(redirectUrl, 302);
 }
 
@@ -45,6 +48,6 @@ export async function GET(request: Request) {
   const target = url.searchParams.get('url');
   const gclid = url.searchParams.get('gclid');
   if (!gclid) return Response.redirect(HOMEPAGE, 302);
-  const redirectUrl = target && isValidRedirectUrl(target) ? target : 'https://be.elementor.com/visit/?bta=204253&brand=elementor';
+  const redirectUrl = target && isValidRedirectUrl(target) ? target : DEFAULT_REDIRECT;
   return Response.redirect(redirectUrl, 302);
 }
