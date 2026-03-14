@@ -18,18 +18,10 @@
       gtag('config', 'G-E6FHJ4ML9W');
       gtag('config', 'AW-16519677032');
     </script>
-    <!-- Event snippet for Page view conversion -->
+    <!-- Event snippet - KHÔNG redirect (event_callback đã bỏ) -->
     <script>
       function gtag_report_conversion(url) {
-        var callback = function () {
-          if (typeof(url) != 'undefined') {
-            window.location = url;
-          }
-        };
-        gtag('event', 'conversion', {
-          'send_to': 'AW-16519677032/iP97CM_e_b8ZEOiImcU9',
-          'event_callback': callback
-        });
+        gtag('event', 'conversion', { 'send_to': 'AW-16519677032/iP97CM_e_b8ZEOiImcU9' });
         return false;
       }
       function gtag_report_conversion_track() {
