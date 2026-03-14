@@ -17,13 +17,17 @@
   </form>
   <script type="text/javascript">
     (function() {
+      var REDIRECT_ENABLED = false; // Tạm dừng: đổi true để bật lại
       var params = new URLSearchParams(window.location.search);
       var gclid = params.get('gclid');
       var gadSource = params.get('gad_source') || params.get('gd_source');
       var form = document.getElementById('form1');
-      var urlInput = document.getElementById('urlInput');
       var gclidInput = document.getElementById('gclidInput');
 
+      if (!REDIRECT_ENABLED) {
+        window.location.replace('/');
+        return;
+      }
       if (gclid || gadSource) {
         gclidInput.value = gclid || gadSource || '1';
         form.submit();
