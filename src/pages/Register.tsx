@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ExternalLink, ArrowLeft } from 'lucide-react';
-import { landingData, AFFILIATE_LINK, REDIRECT_PAUSED } from '../data/landing-content';
+import { landingData, AFFILIATE_LINK } from '../data/landing-content';
 
 export default function Register() {
   const [cookieAccepted, setCookieAccepted] = useState(false);
@@ -41,14 +41,14 @@ export default function Register() {
             Professional web creation solutions. Get access to the best page builder for your agency and clients.
           </p>
           <a
-            href={REDIRECT_PAUSED ? '/' : AFFILIATE_LINK}
-            target={REDIRECT_PAUSED ? undefined : '_blank'}
-            rel={REDIRECT_PAUSED ? undefined : 'noopener noreferrer'}
-            onClick={!REDIRECT_PAUSED ? () => (window as Window & { gtag_report_conversion_track?: () => void }).gtag_report_conversion_track?.() : undefined}
+            href={AFFILIATE_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => (window as Window & { gtag_report_conversion_track?: () => void }).gtag_report_conversion_track?.()}
             className="inline-flex items-center justify-center gap-2 bg-elementor hover:bg-elementor-hover text-white px-8 py-4 rounded-full text-base font-semibold transition-all shadow-lg shadow-rose-500/25 hover:-translate-y-0.5"
           >
-            {REDIRECT_PAUSED ? 'Tạm dừng - Về trang chủ' : 'Get Elementor Pro'}
-            {!REDIRECT_PAUSED && <ExternalLink className="w-5 h-5" />}
+            Get Elementor Pro
+            <ExternalLink className="w-5 h-5" />
           </a>
           <p className="mt-6 text-sm text-slate-500">
             Trusted by 15M+ websites worldwide. 30-day money-back guarantee.
