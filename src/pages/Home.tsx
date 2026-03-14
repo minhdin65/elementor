@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { CheckCircle2, ChevronRight, Info, Menu, X } from 'lucide-react';
-import { landingData, AFFILIATE_LINK } from '../data/landing-content';
+import { landingData, AFFILIATE_LINK, REDIRECT_PAUSED } from '../data/landing-content';
+
+const getAffiliateLink = () => REDIRECT_PAUSED ? '/' : AFFILIATE_LINK;
 import { iconMap } from '../data/iconMap';
 
 export default function Home() {
@@ -26,13 +28,13 @@ export default function Home() {
               ))}
               <Link to="/register" className="text-sm font-medium text-slate-600 hover:text-elementor transition-colors">{landingData.nav.registerLabel}</Link>
               <a 
-                href={AFFILIATE_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => (window as Window & { gtag_report_conversion_track?: () => void }).gtag_report_conversion_track?.()}
+                href={getAffiliateLink()}
+                target={REDIRECT_PAUSED ? undefined : '_blank'}
+                rel={REDIRECT_PAUSED ? undefined : 'noopener noreferrer'}
+                onClick={!REDIRECT_PAUSED ? () => (window as Window & { gtag_report_conversion_track?: () => void }).gtag_report_conversion_track?.() : undefined}
                 className="bg-elementor hover:bg-elementor-hover text-white px-6 py-2.5 rounded-full text-sm font-medium transition-all shadow-sm hover:shadow-md flex items-center gap-2"
               >
-                {landingData.nav.ctaText} {React.createElement(iconMap.ExternalLink, { className: "w-4 h-4" })}
+                {landingData.nav.ctaText} {!REDIRECT_PAUSED && React.createElement(iconMap.ExternalLink, { className: "w-4 h-4" })}
               </a>
             </div>
 
@@ -53,13 +55,13 @@ export default function Home() {
               ))}
               <Link to="/register" className="text-sm font-medium text-slate-600" onClick={() => setIsMenuOpen(false)}>{landingData.nav.registerLabel}</Link>
               <a 
-                href={AFFILIATE_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => (window as Window & { gtag_report_conversion_track?: () => void }).gtag_report_conversion_track?.()}
+                href={getAffiliateLink()}
+                target={REDIRECT_PAUSED ? undefined : '_blank'}
+                rel={REDIRECT_PAUSED ? undefined : 'noopener noreferrer'}
+                onClick={!REDIRECT_PAUSED ? () => (window as Window & { gtag_report_conversion_track?: () => void }).gtag_report_conversion_track?.() : undefined}
                 className="bg-elementor text-white px-6 py-3 rounded-lg text-sm font-medium text-center flex items-center justify-center gap-2"
               >
-                {landingData.nav.ctaText} {React.createElement(iconMap.ExternalLink, { className: "w-4 h-4" })}
+                {landingData.nav.ctaText} {!REDIRECT_PAUSED && React.createElement(iconMap.ExternalLink, { className: "w-4 h-4" })}
               </a>
             </div>
           </div>
@@ -85,9 +87,11 @@ export default function Home() {
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                   {landingData.hero.ctas.map((cta, idx) => {
                     const IconC = iconMap[cta.icon as keyof typeof iconMap];
+                    const href = cta.href.startsWith('http') ? getAffiliateLink() : cta.href;
+                    const isExternal = cta.href.startsWith('http') && !REDIRECT_PAUSED;
                     return (
-                      <a key={idx} href={cta.href} target={cta.href.startsWith('http') ? "_blank" : undefined} rel={cta.href.startsWith('http') ? "noopener noreferrer" : undefined}
-                        onClick={cta.href.startsWith('http') ? () => (window as Window & { gtag_report_conversion_track?: () => void }).gtag_report_conversion_track?.() : undefined}
+                      <a key={idx} href={href} target={isExternal ? "_blank" : undefined} rel={isExternal ? "noopener noreferrer" : undefined}
+                        onClick={isExternal ? () => (window as Window & { gtag_report_conversion_track?: () => void }).gtag_report_conversion_track?.() : undefined}
                         className={cta.primary ? "w-full sm:w-auto bg-elementor hover:bg-elementor-hover text-white px-8 py-4 rounded-full text-base font-semibold transition-all shadow-lg shadow-rose-500/25 flex items-center justify-center gap-2 hover:-translate-y-0.5" : "w-full sm:w-auto bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 px-8 py-4 rounded-full text-base font-semibold transition-all flex items-center justify-center gap-2"}>
                         {cta.icon === 'PlayCircle' && IconC ? React.createElement(IconC, { className: "w-5 h-5" }) : null} {cta.text} {cta.icon === 'ExternalLink' && IconC ? React.createElement(IconC, { className: "w-5 h-5" }) : null}
                       </a>
@@ -156,7 +160,7 @@ export default function Home() {
                   ))}
                 </div>
                 <div className="mt-10">
-                  <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer" onClick={() => (window as Window & { gtag_report_conversion_track?: () => void }).gtag_report_conversion_track?.()} className="inline-flex items-center gap-2 text-elementor font-semibold hover:text-rose-400 transition-colors">
+                  <a href={getAffiliateLink()} target={REDIRECT_PAUSED ? undefined : '_blank'} rel={REDIRECT_PAUSED ? undefined : 'noopener noreferrer'} onClick={!REDIRECT_PAUSED ? () => (window as Window & { gtag_report_conversion_track?: () => void }).gtag_report_conversion_track?.() : undefined} className="inline-flex items-center gap-2 text-elementor font-semibold hover:text-rose-400 transition-colors">
                     {landingData.workflow.ctaText} <ChevronRight className="w-5 h-5" />
                   </a>
                 </div>
@@ -201,7 +205,7 @@ export default function Home() {
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">{landingData.cta.title}</h2>
             <p className="text-xl text-rose-100 mb-10 max-w-2xl mx-auto">{landingData.cta.description}</p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer" onClick={() => (window as Window & { gtag_report_conversion_track?: () => void }).gtag_report_conversion_track?.()} className="w-full sm:w-auto bg-white text-elementor px-8 py-4 rounded-full text-lg font-bold transition-all shadow-xl hover:scale-105 flex items-center justify-center gap-2">
+              <a href={getAffiliateLink()} target={REDIRECT_PAUSED ? undefined : '_blank'} rel={REDIRECT_PAUSED ? undefined : 'noopener noreferrer'} onClick={!REDIRECT_PAUSED ? () => (window as Window & { gtag_report_conversion_track?: () => void }).gtag_report_conversion_track?.() : undefined} className="w-full sm:w-auto bg-white text-elementor px-8 py-4 rounded-full text-lg font-bold transition-all shadow-xl hover:scale-105 flex items-center justify-center gap-2">
                 {landingData.cta.buttonText} {React.createElement(iconMap.ExternalLink, { className: "w-5 h-5" })}
               </a>
             </div>
@@ -219,7 +223,7 @@ export default function Home() {
                   {landingData.affiliateDisclaimer.text.split(landingData.affiliateDisclaimer.linkPhrase).map((part, i) => (
                     <span key={i}>
                       {i > 0 && (
-                        <a href={AFFILIATE_LINK} target="_blank" rel="noopener noreferrer" onClick={() => (window as Window & { gtag_report_conversion_track?: () => void }).gtag_report_conversion_track?.()} className="text-elementor hover:underline font-medium inline-flex items-center gap-1">
+                        <a href={getAffiliateLink()} target={REDIRECT_PAUSED ? undefined : '_blank'} rel={REDIRECT_PAUSED ? undefined : 'noopener noreferrer'} onClick={!REDIRECT_PAUSED ? () => (window as Window & { gtag_report_conversion_track?: () => void }).gtag_report_conversion_track?.() : undefined} className="text-elementor hover:underline font-medium inline-flex items-center gap-1">
                           {landingData.affiliateDisclaimer.linkPhrase} {React.createElement(iconMap.ExternalLink, { className: "w-3 h-3" })}
                         </a>
                       )}

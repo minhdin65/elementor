@@ -3,6 +3,7 @@
  * Update content here instead of in components
  */
 
+export const REDIRECT_PAUSED = true; // Tạm dừng: đổi false để bật lại chuyển hướng
 export const AFFILIATE_LINK = "https://be.elementor.com/visit/?bta=204253&brand=elementor";
 export const SITE_URL = "https://elementorpro.vercel.app";
 

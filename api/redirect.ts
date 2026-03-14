@@ -18,8 +18,10 @@ function isValidRedirectUrl(url: string): boolean {
 }
 
 const HOMEPAGE = 'https://elementorpro.vercel.app/';
+const REDIRECT_PAUSED = true; // Tạm dừng: đổi false để bật lại
 
 export async function POST(request: Request) {
+  if (REDIRECT_PAUSED) return Response.redirect(HOMEPAGE, 302);
   let url: string | null = null;
   let gclid: string | null = null;
   const contentType = request.headers.get('content-type') || '';
@@ -52,6 +54,7 @@ export async function POST(request: Request) {
 }
 
 export async function GET(request: Request) {
+  if (REDIRECT_PAUSED) return Response.redirect(HOMEPAGE, 302);
   const url = new URL(request.url);
   const target = url.searchParams.get('url');
   const gclid = url.searchParams.get('gclid') || url.searchParams.get('gad_source') || url.searchParams.get('gd_source');

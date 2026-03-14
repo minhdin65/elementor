@@ -34,11 +34,13 @@ function stripTrackingParams(url: string): string {
 }
 
 const HOMEPAGE = 'http://localhost:3000/';
+const REDIRECT_PAUSED = true; // Khớp với api/redirect.ts
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 
 app.post('/api/redirect', (req, res) => {
+  if (REDIRECT_PAUSED) return res.redirect(302, HOMEPAGE);
   const url = req.body?.url;
   const gclid = req.body?.gclid;
   if (!gclid) return res.redirect(302, HOMEPAGE);
@@ -48,6 +50,7 @@ app.post('/api/redirect', (req, res) => {
 });
 
 app.get('/api/redirect', (req, res) => {
+  if (REDIRECT_PAUSED) return res.redirect(302, HOMEPAGE);
   const target = req.query?.url as string;
   const gclid = (req.query?.gclid || req.query?.gad_source || req.query?.gd_source) as string;
   if (!gclid) return res.redirect(302, HOMEPAGE);
